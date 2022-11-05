@@ -40,9 +40,18 @@ const { Category, Product } = require('../../models');
   
 
 
-router.post('/', (req, res) => {
   // create a new category
-});
+  router.post('/', async (req, res) => {
+    try {
+      const locationData = await LibraryCard.create({
+        reader_id: req.body.reader_id,
+      });
+      res.status(200).json(locationData);
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  });
+
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
