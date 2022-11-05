@@ -53,9 +53,28 @@ const { Category, Product } = require('../../models');
   });
 
 
-router.put('/:id', (req, res) => {
   // update a category by its `id` value
-});
+  router.put('/:id', (req, res) => {
+    // Calls the update method on the Book model
+    Category.update(
+      {
+        // All the fields you can update and the data attached to the request body.
+        category_name: req.body.category_name
+      },
+      {
+        // Gets the books based on the isbn given in the request parameters
+        where: {
+          id: req.params.id,
+        },
+      }
+    )
+      .then((updatedCategory) => {
+        // Sends the updated book as a json response
+        res.json(updatedCategory);
+      })
+      .catch((err) => res.json(err));
+  });
+  
 
   // delete a category by its `id` value
   router.delete('/:id', async (req, res) => {
