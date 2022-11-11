@@ -36,6 +36,7 @@ router.post('/', async (req, res) => {
   try {
     const productData = await Product.create({
       product_name: req.body.product_name,
+      price: req.body.price,
     });
     res.status(200).json(productData);
   } catch (err) {
@@ -72,7 +73,7 @@ router.put('/:id', (req, res) => {
       });
   
       if (!productData) {
-        res.status(404).json({ message: 'No library card found with that id!' });
+        res.status(404).json({ message: 'No Product found with that id!' });
         return;
       }
   
